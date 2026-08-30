@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Official QR Digital Menu for VARDHAN RESTAURANT - Near Sindri, Goushala Bazar, B.I.T Main Gate Opposite. Order delicious North Indian, Biryani, Tandoori, and Chinese dishes.">
+  <meta name="theme-color" content="#0F4C3A">
+  <title>VARDHAN RESTAURANT | QR Digital Menu & Table Ordering</title>
+
+  <!-- Google Fonts: Cinzel & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       STICKY HEADER
+       ========================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <div class="header-inner">
+        <!-- Brand Logo & Titles -->
+        <a href="#siteHeader" class="brand-section" aria-label="Vardhan Restaurant Home">
+          <div class="brand-logo-emblem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+              <line x1="6" y1="1" x2="6" y2="4"></line>
+              <line x1="10" y1="1" x2="10" y2="4"></line>
+              <line x1="14" y1="1" x2="14" y2="4"></line>
+            </svg>
+          </div>
+          <div class="brand-titles">
+            <h1 class="restaurant-title">VARDHAN RESTAURANT</h1>
+            <p class="restaurant-subtitle">Near Sindri, Goushala Bazar • B.I.T Main Gate Opposite</p>
+          </div>
+        </a>
+
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <button class="header-table-badge" id="headerTableBadge" title="Select or View Table Number" aria-label="Table number selector">
+            <span>Select</span> <strong>Table</strong>
+          </button>
+
+          <button class="header-btn" id="callActionBtn" title="Call Restaurant" aria-label="Call Restaurant">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </button>
+
+          <button class="header-btn" id="headerCartBtn" title="View Cart" aria-label="View Cart">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="header-cart-badge" id="headerCartBadge">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO QUICK CONTACT BAR
+       ========================================================================== -->
+  <div class="hero-quick-bar">
+    <div class="container">
+      <div class="quick-actions-row">
+        <div class="quick-actions-left" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button class="quick-action-pill call-pill" id="quickCallBtn" onclick="document.getElementById('callActionBtn').click()">
+            <span>📞</span> <span>Call: 9523499925</span>
+          </button>
+          <button class="quick-action-pill" id="locationActionBtn">
+            <span>📍</span> <span>Opp. B.I.T Main Gate</span>
+          </button>
+        </div>
+        <div class="quick-actions-right">
+          <button class="quick-action-pill" id="qrToolBtn" title="Generate Table QR Code">
+            <span>🖨️</span> <span>Table QR Tool</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       SEARCH & DIETARY CONTROLS (STICKY)
+       ========================================================================== -->
+  <div class="controls-wrapper">
+    <div class="container">
+      <!-- Search Box -->
+      <div class="search-box-container">
+        <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search for dishes, biryani, paneer, noodles..." autocomplete="off" />
+        <button class="search-clear-btn" id="clearSearchBtn" aria-label="Clear search">✕</button>
+      </div>
+
+      <!-- Dietary Toggle Pills -->
+      <div class="dietary-filters-row">
+        <button class="diet-filter-btn active" data-filter="all">All Dishes</button>
+        <button class="diet-filter-btn" data-filter="veg">
+          <span class="diet-icon veg"><span class="diet-dot"></span></span>
+          Pure Veg
+        </button>
+        <button class="diet-filter-btn" data-filter="non-veg">
+          <span class="diet-icon non-veg"><span class="diet-dot"></span></span>
+          Non-Veg
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       CATEGORY NAVIGATION PILLS (STICKY)
+       ========================================================================== -->
+  <nav class="category-nav-section" aria-label="Menu Categories">
+    <div class="container">
+      <div class="category-scroll-bar" id="categoryBar">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       MAIN MENU CONTENT CONTAINER
+       ========================================================================== -->
+  <main class="container">
+
+    <!-- Popular Items Hero Section -->
+    <section class="popular-section" id="popularSection">
+      <h2 class="section-hero-title">
+        <span>⭐</span> Popular & Signature Dishes
+      </h2>
+      <div class="popular-scroll-grid" id="popularItemsContainer">
+        <!-- Rendered by app.js with high-res food imagery -->
+      </div>
+    </section>
+
+    <!-- Categorized Menu Sections -->
+    <div id="menuContainer">
+      <!-- Full categorized menu sections rendered dynamically by app.js -->
+    </div>
+
+  </main>
+
+  <!-- ==========================================================================
+       FLOATING CART ACTION BAR
+       ========================================================================== -->
+  <div class="floating-cart-bar" id="floatingCartBar" role="button" aria-label="View Cart and Checkout">
+    <div class="floating-cart-left">
+      <div class="floating-cart-icon-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+      </div>
+      <div class="floating-cart-meta">
+        <span class="floating-cart-count" id="floatingCartCount">0 ITEMS</span>
+        <span class="floating-cart-total" id="floatingCartTotal">₹0</span>
+      </div>
+    </div>
+    <div class="floating-cart-right">
+      <span>View Cart</span>
+      <span class="cart-chevron">→</span>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       CART SLIDE-OVER DRAWER
+       ========================================================================== -->
+  <div class="cart-drawer-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
+    <div class="drawer-header">
+      <div class="drawer-title-wrap">
+        <h3 class="drawer-title">Your Order Cart</h3>
+        <span class="drawer-item-count" id="cartTotalItemsHeader">(0)</span>
+      </div>
+      <button class="drawer-close-btn" id="cartCloseBtn" aria-label="Close cart">✕</button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Empty State -->
+      <div class="cart-empty-state" id="cartEmptyState">
+        <div class="empty-cart-icon">🛒</div>
+        <h4>Your cart is empty</h4>
+        <p>Explore our menu and add your favorite dishes to place your order.</p>
+      </div>
+
+      <!-- Items List -->
+      <div class="cart-items-list" id="cartItemsList"></div>
+
+      <!-- Cooking Instructions Note -->
+      <div class="cart-cooking-note-wrap" id="cartCookingNoteWrap">
+        <label for="orderCookingNotes" class="cooking-note-label">Special Cooking Instructions / Requests:</label>
+        <textarea id="orderCookingNotes" class="cooking-note-input" rows="2" placeholder="e.g. Less spicy, extra onions, serve raita cold..."></textarea>
+      </div>
+    </div>
+
+    <!-- Drawer Footer / Summary -->
+    <div class="drawer-footer" id="cartFooter">
+      <div class="bill-row">
+        <span>Item Subtotal</span>
+        <span id="cartSubtotal">₹0</span>
+      </div>
+      <div class="bill-row total-row">
+        <span>Total Payable Amount</span>
+        <span id="cartGrandTotal">₹0</span>
+      </div>
+      <button class="btn-primary" id="placeOrderBtn">
+        <span>Proceed to Place Order</span>
+        <span>→</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       ORDER CONFIRMATION MODAL
+       ========================================================================== -->
+  <div class="modal-backdrop" id="orderModalBackdrop"></div>
+  <div class="modal-container" id="orderConfirmationModal" role="dialog" aria-modal="true" aria-labelledby="orderModalTitle">
+    <div class="modal-header">
+      <h3 class="modal-title" id="orderModalTitle">
+        <span>🍽️</span> Confirm Order
+      </h3>
+      <button class="modal-close-btn" id="orderModalCloseBtn" aria-label="Close modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <!-- Dynamic Order Summary / Receipt Content -->
+      <div id="orderSummaryContent"></div>
+
+      <!-- Order Details Form -->
+      <div id="orderFormFields">
+        <div class="order-form-group">
+          <label for="orderTableInput" class="order-form-label">Table Number (Required)*</label>
+          <input type="text" id="orderTableInput" class="order-form-input" placeholder="e.g. Table 5 or 5" required />
+        </div>
+        <div class="order-form-group">
+          <label for="orderCustomerName" class="order-form-label">Your Name (Optional)</label>
+          <input type="text" id="orderCustomerName" class="order-form-input" placeholder="Enter your name" />
+        </div>
+        <div class="order-form-group">
+          <label for="orderCustomerPhone" class="order-form-label">Phone Number (Optional)</label>
+          <input type="tel" id="orderCustomerPhone" class="order-form-input" placeholder="Enter 10-digit mobile number" />
+        </div>
+      </div>
+
+      <button class="btn-primary" id="finalConfirmOrderBtn">
+        <span>👨‍🍳 Send Order to Kitchen</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       CALL RESTAURANT MODAL
+       ========================================================================== -->
+  <div class="modal-backdrop" id="callModalBackdrop"></div>
+  <div class="modal-container" id="callModal" role="dialog" aria-modal="true" aria-labelledby="callModalTitle">
+    <div class="modal-header">
+      <h3 class="modal-title" id="callModalTitle">
+        <span>📞</span> Call Vardhan Restaurant
+      </h3>
+      <button class="modal-close-btn" id="callModalCloseBtn" aria-label="Close modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        Tap any number below to connect directly with the restaurant management & order desk:
+      </p>
+      <div class="call-numbers-list">
+        <a href="tel:9523499925" class="call-number-card">
+          <div class="call-card-left">
+            <div class="call-card-icon">📞</div>
+            <div>
+              <div class="call-card-number">9523499925</div>
+              <div class="call-card-type">Primary Mobile / WhatsApp</div>
+            </div>
+          </div>
+          <span class="call-badge-btn">Call Now</span>
+        </a>
+
+        <a href="tel:7903203477" class="call-number-card">
+          <div class="call-card-left">
+            <div class="call-card-icon">📞</div>
+            <div>
+              <div class="call-card-number">7903203477</div>
+              <div class="call-card-type">Mobile Support</div>
+            </div>
+          </div>
+          <span class="call-badge-btn">Call Now</span>
+        </a>
+
+        <a href="tel:03263566200" class="call-number-card">
+          <div class="call-card-left">
+            <div class="call-card-icon">☎️</div>
+            <div>
+              <div class="call-card-number">0326-3566200</div>
+              <div class="call-card-type">Landline Desk</div>
+            </div>
+          </div>
+          <span class="call-badge-btn">Call Now</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       LOCATION & DIRECTIONS MODAL
+       ========================================================================== -->
+  <div class="modal-backdrop" id="locationModalBackdrop"></div>
+  <div class="modal-container" id="locationModal" role="dialog" aria-modal="true" aria-labelledby="locModalTitle">
+    <div class="modal-header">
+      <h3 class="modal-title" id="locModalTitle">
+        <span>📍</span> Restaurant Location
+      </h3>
+      <button class="modal-close-btn" id="locationModalCloseBtn" aria-label="Close modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="location-content-box">
+        <div class="location-address-card">
+          <h4>VARDHAN RESTAURANT</h4>
+          <p><strong>Address:</strong> Near Sindri, Goushala Bazar, Opposite B.I.T Main Gate, Dhanbad / Sindri Region.</p>
+          <p style="margin-top: 0.5rem;"><strong>Landmark:</strong> Directly opposite the main entrance gate of B.I.T Sindri campus.</p>
+        </div>
+        <a href="https://maps.google.com/?q=BIT+Sindri+Main+Gate+Goushala+Bazar" target="_blank" rel="noopener noreferrer" class="btn-primary" style="text-decoration: none;">
+          <span>🗺️ Open in Google Maps</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       TABLE SELECTOR MODAL
+       ========================================================================== -->
+  <div class="modal-backdrop" id="tableSelectorBackdrop"></div>
+  <div class="modal-container" id="tableSelectorModal" role="dialog" aria-modal="true" aria-labelledby="tableModalTitle">
+    <div class="modal-header">
+      <h3 class="modal-title" id="tableModalTitle">
+        <span>🪑</span> Select Your Table
+      </h3>
+      <button class="modal-close-btn" id="tableSelectorCloseBtn" aria-label="Close modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        Please tap your table number located on the table standee:
+      </p>
+      <div class="table-picker-container">
+        <div class="table-grid" id="tableGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       QR CODE GENERATOR / MANAGER MODAL
+       ========================================================================== -->
+  <div class="modal-backdrop" id="qrToolBackdrop"></div>
+  <div class="modal-container" id="qrToolModal" role="dialog" aria-modal="true" aria-labelledby="qrModalTitle">
+    <div class="modal-header">
+      <h3 class="modal-title" id="qrModalTitle">
+        <span>🖨️</span> Table QR Standee Tool
+      </h3>
+      <button class="modal-close-btn" id="qrToolCloseBtn" aria-label="Close modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="qr-tool-box">
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">
+          Select table number to generate a direct-access QR code for table standees:
+        </p>
+        <div class="qr-select-wrap">
+          <select id="qrTableSelect" class="qr-select-dropdown" aria-label="Select Table"></select>
+        </div>
+
+        <div class="qr-display-frame" id="qrCodeDisplay">
+          <!-- Dynamically populated QR Code -->
+        </div>
+
+        <div class="qr-url-text" id="qrUrlDisplay"></div>
+
+        <button class="btn btn-outline" onclick="window.print()" style="width: 100%;">
+          <span>🖨️ Print Table Standee</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       RESTAURANT FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>VARDHAN RESTAURANT</h3>
+          <p>
+            Near Sindri, Goushala Bazar<br>
+            B.I.T Main Gate Opposite
+          </p>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">
+            Serving authentic North Indian curries, Hyderabadi Dum Biryani, Tandoori Starters, and Indo-Chinese specialties.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Order & Reservations</h4>
+          <ul class="footer-phone-list">
+            <li><a href="tel:9523499925">📞 9523499925</a></li>
+            <li><a href="tel:7903203477">📞 7903203477</a></li>
+            <li><a href="tel:03263566200">☎️ 0326-3566200</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Actions</h4>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <button class="btn btn-primary" style="margin-top: 0; padding: 0.65rem;" onclick="document.getElementById('callActionBtn').click()">
+              <span>📞 Call Now</span>
+            </button>
+            <button class="btn btn-outline" style="padding: 0.65rem;" onclick="document.getElementById('locationActionBtn').click()">
+              <span>📍 View Location</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 VARDHAN RESTAURANT. All rights reserved.</div>
+        <div>QR-Based Digital Restaurant Menu System</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       TOAST NOTIFICATION
+       ========================================================================== -->
+  <div class="toast-notice" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Core Application Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>

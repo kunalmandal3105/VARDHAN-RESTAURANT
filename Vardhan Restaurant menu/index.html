@@ -152,8 +152,15 @@
   </main>
 
   <!-- ==========================================================================
-       FLOATING CART ACTION BAR
+       FLOATING ACTIONS (Cart Bar & Quick Menu FAB)
        ========================================================================== -->
+  <!-- Floating Menu FAB (Quick Category Jump on Mobile) -->
+  <button class="floating-menu-fab" id="floatingMenuFab" aria-label="Browse Menu Categories">
+    <span class="fab-icon">📖</span>
+    <span class="fab-text">MENU</span>
+  </button>
+
+  <!-- Floating Cart Action Bar -->
   <div class="floating-cart-bar" id="floatingCartBar" role="button" aria-label="View Cart and Checkout">
     <div class="floating-cart-left">
       <div class="floating-cart-icon-wrap">
@@ -386,6 +393,25 @@
         <button class="btn btn-outline" onclick="window.print()" style="width: 100%;">
           <span>🖨️ Print Table Standee</span>
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       CATEGORY QUICK JUMP BOTTOM SHEET (MOBILE)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="categorySheetBackdrop"></div>
+  <div class="modal-container category-sheet-modal" id="categorySheetModal" role="dialog" aria-modal="true" aria-labelledby="catSheetTitle">
+    <div class="bottom-sheet-grab-bar"></div>
+    <div class="modal-header">
+      <h3 class="modal-title" id="catSheetTitle">
+        <span>📖</span> Browse Categories
+      </h3>
+      <button class="modal-close-btn" id="categorySheetCloseBtn" aria-label="Close categories">✕</button>
+    </div>
+    <div class="modal-body category-sheet-body">
+      <div class="category-sheet-grid" id="categorySheetGrid">
+        <!-- Rendered by app.js -->
       </div>
     </div>
   </div>

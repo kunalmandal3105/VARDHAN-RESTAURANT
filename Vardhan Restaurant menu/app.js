@@ -423,7 +423,12 @@ function cacheDomElements() {
     qrToolBtn: document.getElementById("qrToolBtn"),
     qrTableSelect: document.getElementById("qrTableSelect"),
     qrCodeDisplay: document.getElementById("qrCodeDisplay"),
-    qrUrlDisplay: document.getElementById("qrUrlDisplay")
+    qrUrlDisplay: document.getElementById("qrUrlDisplay"),
+    floatingMenuFab: document.getElementById("floatingMenuFab"),
+    categorySheetModal: document.getElementById("categorySheetModal"),
+    categorySheetBackdrop: document.getElementById("categorySheetBackdrop"),
+    categorySheetCloseBtn: document.getElementById("categorySheetCloseBtn"),
+    categorySheetGrid: document.getElementById("categorySheetGrid")
   };
 }
 
@@ -738,6 +743,9 @@ function getCartCalculations() {
 
 function updateCartUI() {
   const { totalItems, subtotal, grandTotal } = getCartCalculations();
+
+  // Toggle body class for floating FAB positioning
+  document.body.classList.toggle("cart-active", totalItems > 0);
 
   // Floating Cart Bar at bottom
   if (dom.floatingCartBar) {
@@ -1161,6 +1169,85 @@ function attachEventListeners() {
       updateQrCodePreview(parseInt(e.target.value));
     });
   }
+
+  // Floating Menu FAB & Category Sheet (Mobile)
+  if (dom.floatingMenuFab) {
+    dom.floatingMenuFab.addEventListener("click", () => {
+      renderCategorySheet();
+      openModal(dom.categorySheetModal, dom.categorySheetBackdrop);
+    });
+  }
+  if (dom.categorySheetCloseBtn) {
+    dom.categorySheetCloseBtn.addEventListener("click", () => closeModal(dom.categorySheetModal, dom.categorySheetBackdrop));
+  }
+  if (dom.categorySheetBackdrop) {
+    dom.categorySheetBackdrop.addEventListener("click", () => closeModal(dom.categorySheetModal, dom.categorySheetBackdrop));
+  }
+}
+
+// Render Category Sheet Quick Jump (Mobile)
+function renderCategorySheet() {
+  if (!dom.categorySheetGrid) return;
+
+  const normalCategories = CATEGORIES.filter(c => c.id !== "popular");
+  
+  let html = `
+    <button class="category-sheet-item ${state.activeCategory === 'popular' ? 'active' : ''}" onclick="jumpToCategory('popular')">
+      <span class="category-sheet-icon">⭐</span>
+      <div class="category-sheet-text">
+        <span class="category-sheet-name">Popular Items</span>
+        <span class="category-sheet-count">6 Bestsellers</span>
+      </div>
+    </button>
+  `;
+
+  normalCategories.forEach(cat => {
+    const count = MENU_DATA.filter(item => item.category === cat.id).length;
+    const isSelected = state.activeCategory === cat.id;
+
+    html += `
+      <button class="category-sheet-item ${isSelected ? 'active' : ''}" onclick="jumpToCategory('${cat.id}')">
+        <span class="category-sheet-icon">${cat.icon}</span>
+        <div class="category-sheet-text">
+          <span class="category-sheet-name">${cat.name}</span>
+          <span class="category-sheet-count">${count} items</span>
+        </div>
+      </button>
+    `;
+  });
+
+  dom.categorySheetGrid.innerHTML = html;
+}
+
+function jumpToCategory(categoryId) {
+  state.activeCategory = categoryId;
+  closeModal(dom.categorySheetModal, dom.categorySheetBackdrop);
+
+  // Update pill
+  document.querySelectorAll(".category-pill").forEach(p => {
+    p.classList.toggle("active", p.dataset.category === categoryId);
+  });
+
+  // Smooth scroll
+  setTimeout(() => {
+    if (categoryId === "popular") {
+      const popularElem = document.getElementById("popularSection");
+      if (popularElem) {
+        popularElem.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else {
+      const sectionElem = document.getElementById(`section-${categoryId}`);
+      if (sectionElem) {
+        const headerOffset = 145;
+        const elementPosition = sectionElem.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }
+  }, 150);
 }
 
 // Table Grid Picker (Tables 1 to 24)
